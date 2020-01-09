@@ -130,10 +130,12 @@ function createQuiz(){
     var option1 = $("#option1").val();
     var option2 = $("#option2").val();
     var option3 = $("#option3").val();
-    
+    var option4 = $("#option4").val();
+    var option5 = $("#option5").val();
+
     //空の要素がないことを確認する
     if (quizText !== "" && answer !== "" &&
-        option1 !== "" && option2 !== "" && option3 !== ""){
+        option1 !== "" && option2 !== "" && option3 !== ""&& option4 !== "" && option5 !== ""){
         //クイズクラスのインスタンスを作成する
         var QuizClass = ncmb.DataStore("Quiz");
         var quiz = new QuizClass();
@@ -141,7 +143,7 @@ function createQuiz(){
         //取得したクイズの内容をセットし、mobile backendにクイズを登録する
         quiz.set("quizText", quizText)
             .set("answer", answer)
-            .set("options", [option1, option2, option3])
+            .set("options", [option1, option2, option3, option4, option5])
             .save()
             .then(function(object) {
                 $("#create_button_area").hide();
@@ -220,16 +222,16 @@ function displayQuiz(quiz){
     
     //選択肢が入っている配列の末尾に正解を追加する
     var array = quiz.get("options");
-    array[3] = quiz.get("answer");
+    array[5] = quiz.get("answer");
     
     //正解とダミーの選択肢をランダムに入れ替える
-    var index = Math.floor(Math.random() * 3);
+    var index = Math.floor(Math.random() * 5);
     var tmp = array[index];
-    array[index] = array[3];
-    array[3] = tmp;
+    array[index] = array[5];
+    array[5] = tmp;
     
     //正解を含んだ選択肢の配列を表示する
-    for (var i = 0; i < 4; i++){
+    for (var i = 0; i < 6; i++){
         var btn = $("<ons-button onclick=\"answerQuiz('" + array[i] + "')\">" + array[i] + "</ons-button>");
         btn.appendTo($("#answer_options"));
         ons.compile(btn[0]);
