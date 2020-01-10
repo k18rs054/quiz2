@@ -217,6 +217,7 @@ function displayQuiz(quiz){
     //問題文を表示
     $("#question").text(quiz.get("quizText"));
     
+    
     //選択肢を表示する部分が見えるようにする
     $("#answer_options").show();
     
